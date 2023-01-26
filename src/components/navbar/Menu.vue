@@ -1,6 +1,8 @@
 <script setup>
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 
+defineProps(['isBurgerMenu']);
+
 const menuItems = [
   {
     name: `HOME`,
@@ -21,7 +23,8 @@ const langSelections = ['vn', 'en', 'fr'];
 
 <template>
   <menu
-    class="fixed inset-0 z-10 flex flex-col items-center justify-center gap-5 font-bold transition-all duration-700 bg-white font-Poppins lg:static lg:order-2 lg:flex lg:translate-x-0 lg:flex-row lg:bg-transparent">
+    :class="!isBurgerMenu && '-translate-x-[150%]'"
+    class="fixed inset-0 z-10 flex flex-col items-center justify-center gap-5 font-bold transition-all duration-700 bg-white font-Poppins lg:static lg:flex lg:translate-x-0 lg:flex-row lg:bg-transparent">
     <div
       v-for="item in menuItems"
       :key="item"
