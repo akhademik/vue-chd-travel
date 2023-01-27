@@ -16,6 +16,6 @@ const handleInput = () => {
       @input="handleInput" />
     <span
       :style="{ transform: `rotate(${angle}deg)` }"
-      class="border-y-4 border-chd h-[20px] w-[36px] transition-all duration-700 ease-in-out peer-checked:animate-pulse peer-hover:p-2"></span>
+      class="border-y-4 border-chd h-[15px] w-[36px] transition-all duration-700 ease-in-out peer-checked:animate-pulse peer-hover:p-2"></span>
   </div>
 </template>

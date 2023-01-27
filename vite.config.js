@@ -22,6 +22,9 @@ export default defineConfig({
       '@navbar': fileURLToPath(
         new URL('./src/components/navbar', import.meta.url)
       ),
+      '@homeview': fileURLToPath(
+        new URL('./src/components/homeview', import.meta.url)
+      ),
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
     },
   },

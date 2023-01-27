@@ -1,19 +1,30 @@
-<script setup></script>
+<script setup>
+import HomeHeading from '@homeview/HomeHeading.vue';
+import HomeIntro from '@homeview/HomeIntro.vue';
+import TourSlides from '@components/TourSlides.vue';
+
+// import { useTranslation } from 'i18next-vue';
+// const { t } = useTranslation(['tours']);
+
+const heading = 'LEADING TRAVEL SPECIALISTS FOR CENTRAL HIGHLANDS OF VIETNAM';
+const intro =
+  'We strive to provide our customers with the very best service in the tourism industry today. We are committed to offering travel services of the highest quality, combining our energy and enthusiasm, with our years of experience. Our greatest satisfaction comes in serving large numbers of satisfied clients who have experienced the joys and inspiration of travel.';
+</script>
 
 <template>
-  <main>
-    <h1>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus,
-      voluptas? Consequuntur maiores dolore eligendi doloremque quaerat veniam,
-      cupiditate velit unde voluptatum dolor. Minima explicabo reiciendis
-      dolorum, totam corporis enim quas eveniet ipsa mollitia praesentium
-      aperiam iste modi recusandae dignissimos quis assumenda odit, nam alias.
-      Fugiat ea rerum alias necessitatibus laborum voluptatibus assumenda id
-      repellendus repudiandae iusto ullam, amet neque ab exercitationem non
-      dolorum est facere natus cumque. Id eligendi quam ut hic, cumque aut ipsum
-      vitae quod. Libero hic voluptas eum doloremque, ex eveniet nam eaque odio
-      veritatis id culpa possimus, quasi praesentium expedita vero accusantium
-      tempora amet. Earum, minima?
-    </h1>
+  <main class="mx-auto max-w-[90%] px-4 pt-4 font-Roboto text-chd">
+    <!-- <h1>{{ t('tour_intro', 'tours') }}</h1> -->
+    <h1>{{ $t('tours.daily') }}</h1>
+
+    <HomeHeading :heading="heading" />
+    <HomeIntro :intro="intro" />
+    <div class="text-center">
+      <h1 class="text-4xl font-extrabold md:text-5xl">Our Hot Tours !</h1>
+      <span class="text-base">Client enjoys these tour the most</span>
+    </div>
+    <TourSlides />
+    <p class="mb-10 text-center font-base sm:text-2xl">
+      None of those meet your need ? Call us to tailor made for you !
+    </p>
   </main>
 </template>

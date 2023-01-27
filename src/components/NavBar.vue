@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 z-20 flex items-center justify-between w-full px-4 py-2 font-semibold text-chd">
+    class="sticky top-0 z-20 flex bg-white items-center justify-between w-full px-4 py-2 font-semibold text-chd">
     <BurgerBTN @menuClicked="handleClicked" />
     <Logo />
     <Menu :isBurgerMenu="isBurgerMenu" />
