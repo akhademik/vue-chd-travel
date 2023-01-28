@@ -10,20 +10,10 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/:contact',
-      name: 'contact',
-      component: () => import('@views/ContactView.vue'),
+      path: '/:slug',
+      name: 'slug',
+      component: () => import('@views/SlugRedirect.vue'),
     },
-    // {
-    //   path: '/:slug1',
-    //   name: 'contact',
-    //   component: () => import('@views/ContactView.vue'),
-    // },
-    // {
-    //   path: '/:sluglvl1',
-    //   name: 'sluglvl1redirect',
-    //   component: () => import('@views/_SlugLvl1Redirect.vue'),
-    // },
   ],
 });
 

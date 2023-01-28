@@ -13,15 +13,15 @@ const handleSelected = ({ target }) => {
 const menuItems = [
   {
     name: 'links_items.home',
-    link: '/',
+    link: 'home',
   },
   {
     name: 'links_items.daily_tours',
-    link: '/daily',
+    link: 'slug',
   },
   {
     name: 'links_items.central_tours',
-    link: '/central',
+    link: 'slug',
   },
 ];
 </script>
@@ -38,7 +38,7 @@ const menuItems = [
     >
       <RouterLink
         class="relative z-0 uppercase before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-2 before:w-0 before:-translate-x-1/2 before:bg-pink-400 before:transition-all before:duration-300 before:ease-linear before:hover:w-[110%] lg:before:translate-y-3 lg:before:bg-orange-400 lg:before:duration-200 cursor-pointer"
-        :to="{ path: item.link }"
+        :to="{ name: item.link, params: { slug: item.name } }"
       >
         {{ $t(item.name, { ns: 'navbar' }) }}
       </RouterLink>

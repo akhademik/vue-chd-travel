@@ -18,7 +18,7 @@ const handleSelected = ({ target }) => {
     class="relative z-0 justify-end text-2xl lg:flex-1 lg:flex lg:items-center lg:text-xl"
   >
     <select
-      class="hidden mr-3 lg:inline uppercase"
+      class="hidden mr-3 uppercase lg:inline"
       :value="i18next.language"
       @change="handleSelected"
     >
@@ -31,10 +31,9 @@ const handleSelected = ({ target }) => {
       </option>
     </select>
     <RouterLink
-      class="bg-red-400 cursor-pointer check"
       :to="{
-        name: 'contact',
-        params: { contact: slugify($t('get_in_touch', { ns: 'navbar' })) },
+        name: 'slug',
+        params: { slug: slugify($t('get_in_touch', { ns: 'navbar' })) },
       }"
     >
       <UnderlineLink :name="$t('get_in_touch', { ns: 'navbar' })" />
