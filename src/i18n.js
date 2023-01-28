@@ -8,10 +8,11 @@ i18next
   .use(LanguageDetector) // detect user language
   .init({
     //NOTE: declare 2 default namespace to prevent Error
+
     fallbackLng: 'en',
-    debug: true,
-    ns: ['general', 'tours'],
-    defaultNS: 'general',
+    debug: false,
+    ns: ['homepage', 'tours', 'navbar'],
+    defaultNS: 'homepage',
     backend: {
       //NOTE: Load path for the translation files
       loadPath: 'src/public/locales/{{lng}}/{{ns}}.json',
