@@ -2,7 +2,7 @@
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 import { RouterLink } from 'vue-router';
 import { onBeforeMount, watch } from 'vue';
-import i18next from 'i18next';
+// import i18next from 'i18next';
 import { changeLanguage } from '@utils/changeLanguage';
 
 let lng = $ref(i18next.language);
