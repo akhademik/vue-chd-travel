@@ -1,7 +1,7 @@
 <script setup>
 import HomeHeading from '@homeview/HomeHeading.vue';
 import HomeIntro from '@homeview/HomeIntro.vue';
-import TourSlides from '@components/TourSlides.vue';
+import TourSlides from '@homeview/TourSlides.vue';
 </script>
 
 <template>
