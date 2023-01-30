@@ -9,7 +9,7 @@
 
 <script setup>
 import { onBeforeMount, watch } from 'vue';
-import i18next from 'i18next';
+// import i18next from 'i18next';
 
 import { useRouter } from 'vue-router';
 import { changeLanguage } from '@utils/changeLanguage';

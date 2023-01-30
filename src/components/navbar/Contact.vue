@@ -1,23 +1,23 @@
 <script setup>
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 import { RouterLink } from 'vue-router';
-import { onBeforeMount, watch } from 'vue';
+// import { onBeforeMount, watch } from 'vue';
 // import i18next from 'i18next';
 import { changeLanguage } from '@utils/changeLanguage';
 
-let lng = $ref(i18next.language);
+// let lng = $ref(i18next.language);
 
-onBeforeMount(() => {
-  // before page created check the lang and set it
-  !i18next.language && (lng = localStorage.getItem('i18nextLng'));
-});
+// onBeforeMount(() => {
+//   // before page created check the lang and set it
+//   !i18next.language && (lng = localStorage.getItem('i18nextLng'));
+// });
 
-watch(
-  () => i18next.language,
-  newVal => {
-    lng = newVal;
-  }
-);
+// watch(
+//   () => i18next.language,
+//   newVal => {
+//     lng = newVal;
+//   }
+// );
 
 const handleSelected = ({ target }) => {
   changeLanguage(target.value);
