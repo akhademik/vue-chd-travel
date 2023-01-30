@@ -1,4 +1,17 @@
 {
-  "title": "Xin Chao {name}",
-  "test": "DAY LA TEST TIENG VIET"
+  "homeView": {
+    "header": "ĐƠN VỊ CUNG CẤP TOUR HÀNG ĐẦU KHU VỰC TÂY NGUYÊN",
+    "intro": "Chúng tôi cố gắng cung cấp cho khách hàng những dịch vụ tốt nhất trong ngành du lịch hiện nay. Chúng tôi cam kết cung cấp các dịch vụ du lịch với chất lượng cao nhất, kết hợp năng lượng và sự nhiệt tình, với nhiều năm kinh nghiệm của chúng tôi. Sự hài lòng lớn nhất đến với chúng tôi trong việc phục vụ số lượng lớn khách hàng hài lòng, những người đã trải nghiệm niềm vui và cảm hứng khi đi du lịch.",
+    "hot": "Tour tiêu biểu !",
+    "client_enjoy": "Khách hàng đang quan tâm các tour này nhất",
+    "none_chosen": "Không có tour nào đáp ứng nhu cầu của bạn? Hãy gọi cho chúng tôi để được thiết kế tour cho bạn!"
+  },
+  "navBar": {
+    "home": "Trang Chính",
+    "daily_tours": "Tour Hàng Ngày",
+    "central_tours": "Tour Tây Nguyên",
+    "about": "Về Chúng Tôi",
+    "get_in_touch": "Liên Hệ",
+    "phone": "0913.471.352"
+  }
 }

@@ -1,4 +1,5 @@
 import i18n from './i18n';
+import { nextTick } from 'vue';
 
 const Trans = {
   // get the value of default locale
@@ -11,9 +12,31 @@ const Trans = {
     return import.meta.env.VITE_SUPPORTED_LOCALES.split(',');
   },
 
+  get currentLocale() {
+    return i18n.global.locale.value;
+  },
+
   // change the Language to the new selected language
   set currentLocale(newLocale) {
     i18n.global.locale.value = newLocale;
+  },
+
+  // async changing the language
+  // and set locale to 'html lang'
+  // and set locale to local Storage
+  async switchLanguage(newLocale) {
+    await Trans.loadLocaleMessages(newLocale);
+    Trans.currentLocale = newLocale;
+    document.querySelector('html').setAttribute('lang', newLocale);
+    localStorage.setItem('chd-locale', newLocale);
+  },
+
+  async loadLocaleMessages(locale) {
+    if (!i18n.global.availableLocales.includes(locale)) {
+      const messages = await import(`@i18n/locales/${locale}.json`);
+      i18n.global.setLocaleMessage(locale, messages.default);
+    }
+    return nextTick();
   },
 
   // check if a locale is supported on website
@@ -38,9 +61,9 @@ const Trans = {
   },
 
   // guess the locale to display for the first time visit website
-  guessLocale() {
+  guessDefaultLocale() {
     // check if user visited website before and set the locale then use it
-    const userSelectedLocale = Trans.getPreviousSelectedLocale();
+    const userSelectedLocale = Trans.getPersistedLocale();
     if (userSelectedLocale) return userSelectedLocale;
 
     // check if user have set preferred locale in their system then use it
@@ -58,7 +81,7 @@ const Trans = {
   },
 
   // check localStorage for previous selected locale
-  getPreviousSelectedLocale() {
+  getPersistedLocale() {
     const prevSelected = localStorage.getItem('chd-locale');
     // check if the value is correct in supported languages
     if (Trans.isLocaleSupported(prevSelected)) {
@@ -68,15 +91,6 @@ const Trans = {
     }
   },
 
-  // async changing the language
-  // and set locale to 'html lang'
-  // and set locale to local Storage
-  async switchLanguage(newLocale) {
-    Trans.currentLocale = newLocale;
-    document.querySelector('html').setAttribute('lang', newLocale);
-    localStorage.setItem('chd-locale', newLocale);
-  },
-
   // do before each time user change link/route
   async routeMiddleware(to, from, next) {
     // get the params when they navigate TO
@@ -84,12 +98,19 @@ const Trans = {
 
     // if locale param is not supported change to default
     if (!Trans.isLocaleSupported(paramLocale)) {
-      return next(Trans.getUserLocale());
+      return next(Trans.guessDefaultLocale());
     }
 
     // if locale param is supported change the locale base on that
     await Trans.switchLanguage(paramLocale);
     return next();
+  },
+
+  i18nRoute(to) {
+    return {
+      ...to,
+      params: { locale: Trans.currentLocale, ...to.params },
+    };
   },
 };
 

@@ -1,6 +1,6 @@
 <template>
   <Swiper
-    class="my-4 py-2 px-2 lg:max-w-7xl"
+    class="px-2 py-2 my-4 lg:max-w-7xl"
     :autoHeight="true"
     :grabCursor="true"
     :centeredSlides="true"
@@ -46,18 +46,20 @@
       pauseOnMouseEnter: true,
     }"
     :modules="[EffectCoverflow, Autoplay, Pagination, Navigation]"
-    @slideChange="handleSlideChange">
+    @slideChange="handleSlideChange"
+  >
     <SwiperSlide
       v-for="(item, idx) in data"
       :key="idx"
       class="flex justify-center"
-      :class="sliderStyle">
+      :class="sliderStyle"
+    >
       <img
         :src="item.img"
-        loading="lazy"
         :class="sliderStyle"
         class="w-[230px] object-cover sm:w-full"
-        :alt="item.caption" />
+        :alt="item.caption"
+      />
     </SwiperSlide>
     <div className="mx-auto mt-4 flex w-[80%] items-center justify-center">
       <span className="flex w-min px-2 text-sm whitespace-nowrap">

@@ -1,31 +1,21 @@
 <script setup>
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 import { RouterLink } from 'vue-router';
-// import i18next from 'i18next';
-import { onBeforeMount } from 'vue';
-import { changeLanguage } from '@utils/changeLanguage';
-let lng = $ref(i18next.language);
-defineProps(['isBurgerMenu']);
+import LanguageSwitcher from '@components/LanguageSwitcher.vue';
 
-const handleSelected = ({ target }) => {
-  changeLanguage(target.textContent);
-  lng = target.textContent;
-};
-onBeforeMount(() => {
-  !i18next.language && (lng = localStorage.getItem('i18nextLng'));
-});
+defineProps(['isBurgerMenu']);
 
 const menuItems = [
   {
-    name: 'links_items.home',
+    name: 'navBar.home',
     link: 'home',
   },
   {
-    name: 'links_items.daily_tours',
+    name: 'navBar.daily_tours',
     link: 'home',
   },
   {
-    name: 'links_items.central_tours',
+    name: 'navBar.central_tours',
     link: 'home',
   },
 ];
@@ -49,23 +39,13 @@ const menuItems = [
             : { name: item.link, params: { menu: item.name } }
         "
       >
-        {{ $t(item.name, { ns: 'navbar' }) }}
+        {{ $t(item.name) }}
       </RouterLink>
     </div>
 
     <div class="absolute bottom-0 w-full p-4 lg:hidden">
       <div class="flex items-end justify-between sm:text-2xl">
-        <div class="flex gap-4">
-          <button
-            v-for="lang in ['vn', 'en', 'fr']"
-            :key="lang"
-            class="uppercase"
-            :class="lng === lang ? 'text-chd' : 'text-chd/30'"
-            @click="handleSelected"
-          >
-            {{ lang }}
-          </button>
-        </div>
+        <LanguageSwitcher :scrSize="false" />
 
         <div className="flex flex-col text-right">
           <div>
