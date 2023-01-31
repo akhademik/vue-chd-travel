@@ -8,9 +8,7 @@ import vue from '@vitejs/plugin-vue';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
-      reactivityTransform: true,
-    }),
+    vue({}),
     VueI18nPlugin({
       //location for translation files
       // prettier-ignore

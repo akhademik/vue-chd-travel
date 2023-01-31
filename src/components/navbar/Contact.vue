@@ -11,10 +11,10 @@ import LanguageSwitcher from '@components/LanguageSwitcher.vue';
     <LanguageSwitcher :scrSize="true" />
     <RouterLink
       :to="{
-        name: `home`,
+        name: 'contact',
       }"
     >
-      <UnderlineLink :name="$t('navBar.get_in_touch', { ns: 'navbar' })" />
+      <UnderlineLink :name="$t('navBar.get_in_touch')" />
     </RouterLink>
   </div>
 </template>

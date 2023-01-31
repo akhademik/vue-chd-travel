@@ -2,21 +2,25 @@
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 import { RouterLink } from 'vue-router';
 import LanguageSwitcher from '@components/LanguageSwitcher.vue';
+import Trans from '@i18n/translation';
 
-defineProps(['isBurgerMenu']);
+const props = defineProps(['isBurgerMenu', 'menuClicked']);
 
 const menuItems = [
   {
     name: 'navBar.home',
     link: 'home',
+    id: 1,
   },
   {
     name: 'navBar.daily_tours',
-    link: 'home',
+    link: 'tours',
+    id: 2,
   },
   {
     name: 'navBar.central_tours',
-    link: 'home',
+    link: 'tours',
+    id: 3,
   },
 ];
 </script>
@@ -28,16 +32,12 @@ const menuItems = [
   >
     <div
       v-for="item in menuItems"
-      :key="item"
+      :key="item.id"
       class="px-2 text-4xl sm:text-6xl lg:text-xl"
     >
       <RouterLink
         class="relative z-0 uppercase before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-2 before:w-0 before:-translate-x-1/2 before:bg-pink-400 before:transition-all before:duration-300 before:ease-linear before:hover:w-[110%] lg:before:translate-y-3 lg:before:bg-orange-400 lg:before:duration-200 cursor-pointer"
-        :to="
-          item.link === 'home'
-            ? { name: item.link }
-            : { name: item.link, params: { menu: item.name } }
-        "
+        :to="Trans.i18nRoute({ name: item.link })"
       >
         {{ $t(item.name) }}
       </RouterLink>
@@ -45,7 +45,10 @@ const menuItems = [
 
     <div class="absolute bottom-0 w-full p-4 lg:hidden">
       <div class="flex items-end justify-between sm:text-2xl">
-        <LanguageSwitcher :scrSize="false" />
+        <LanguageSwitcher
+          :scrSize="false"
+          @menuClicked="menuClicked"
+        />
 
         <div className="flex flex-col text-right">
           <div>

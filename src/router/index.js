@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory, RouterView } from 'vue-router';
 import Trans from '@i18n/translation';
-import TestView from '@components/TestView.vue';
+// import TestView from '@components/TestView.vue';
 import HomeView from '@views/HomeView.vue';
+import ContactView from '@views/ContactView.vue';
+import ToursView from '@views/ToursView.vue';
 
 const routes = [
   // home view
@@ -16,14 +18,23 @@ const routes = [
         component: HomeView,
       },
       {
-        path: 'about',
-        name: 'about',
-        component: TestView,
+        path: 'tours',
+        name: 'tours',
+        component: ToursView,
+        // beforeEnter: (to, from, next) => {
+        //   // ...
+        //   console.log('to ', to);
+        //   console.log('from ', from);
+        //   console.log('next ', next);
+        // },
+      },
+      {
+        path: 'contact',
+        name: 'contact',
+        component: ContactView,
       },
     ],
   },
-  // catch all and redirect back to home
-  // { path: '/:pathMatch(.*)*', redirect: '/' },
 ];
 
 const router = createRouter({

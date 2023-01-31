@@ -2,14 +2,13 @@
 import Trans from '@i18n/translation';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-const router = useRouter();
 
+const emit = defineEmits(['menuClicked']);
+const router = useRouter();
 const { locale } = useI18n();
 
 const props = defineProps(['scrSize']);
 // props.scrSize
-
-const supportedLocales = Trans.supportedLocales;
 
 const switchLanguage = async ({ target }) => {
   // .value for select , .textContent for button
@@ -22,18 +21,19 @@ const switchLanguage = async ({ target }) => {
     console.error(e);
     router.push('/');
   }
+  emit('menuClicked'); //emit event click to close the menu each time change language
 };
 </script>
 
 <template>
   <!-- big screen size -->
   <select
-    v-if="scrSize"
+    v-show="scrSize"
     class="hidden mr-3 uppercase lg:inline text-chd top-20"
     @change="switchLanguage"
   >
     <option
-      v-for="lang in supportedLocales"
+      v-for="lang in Trans.supportedLocales"
       :key="`locale_${lang}`"
       :value="lang"
       :selected="locale === lang"
@@ -44,14 +44,18 @@ const switchLanguage = async ({ target }) => {
 
   <!-- mobile size -->
   <div
-    v-if="!scrSize"
+    v-show="!scrSize"
     class="flex gap-4 text-chd lg:hidden"
   >
     <button
-      v-for="lang in supportedLocales"
+      v-for="lang in Trans.supportedLocales"
       :key="lang"
-      class="uppercase"
-      :class="locale === lang ? 'text-chd' : 'text-chd/30'"
+      class="uppercase relative inline-block px-1 pb-1 z-20 font-Roboto before:absolute before:bottom-0 before:left-0 before:block before:h-[3px] before:w-full mt-1"
+      :class="
+        locale === lang
+          ? 'text-chd before:bg-orange-400'
+          : 'text-chd/30 hover:text-orange-400'
+      "
       @click="switchLanguage"
     >
       {{ lang }}

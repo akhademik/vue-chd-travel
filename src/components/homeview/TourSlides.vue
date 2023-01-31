@@ -78,12 +78,13 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Navigation, Pagination, EffectCoverflow } from 'swiper';
+import { ref } from 'vue';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-let currentSlide = $ref(1);
+const currentSlide = ref(1);
 
 const sliderStyle = 'h-[400px] md:h-[600px] rounded-lg lg:w-[450px] ';
 
@@ -94,7 +95,7 @@ const data = [
 ];
 
 const handleSlideChange = e => {
-  currentSlide = e.realIndex + 1;
+  currentSlide.value = e.realIndex + 1;
 };
 </script>
 

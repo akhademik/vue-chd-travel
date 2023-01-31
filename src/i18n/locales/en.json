@@ -13,5 +13,25 @@
     "about": "about",
     "get_in_touch": "Contact",
     "phone": "(+84)971.864.864"
+  },
+  "loading": {
+    "wait": "PLEASE KINDLY WAIT A MOMENT",
+    "load": "Processing..."
+  },
+  "tourGallery": {
+    "tour_intro": "Tour Intro:",
+    "tour_hightlights": "Highlights:",
+    "tour_itinerary": "Brief Itinerary:",
+    "tour_inclusion": "Inclusions:",
+    "tour_price": "Price:",
+    "price_pax_no": "No of person",
+    "price_price": "Price",
+
+    "daily": "our daily tours",
+    "central": "our central tours",
+    "counting": "and counting...",
+    "group": "Group",
+    "pax": "pax",
+    "price_from": "FROM"
   }
 }
