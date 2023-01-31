@@ -1,0 +1,37 @@
+{
+  "homeView": {
+    "header": "LEADING TRAVEL SPECIALISTS FOR CENTRAL HIGHLANDS OF VIETNAM",
+    "intro": "We strive to provide our customers with the very best service in the tourism industry today. We are committed to offering travel services of the highest quality, combining our energy and enthusiasm, with our years of experience. Our greatest satisfaction comes in serving large numbers of satisfied clients who have experienced the joys and inspiration of travel.",
+    "hot": "Our Hot Tours !",
+    "client_enjoy": "Client enjoys these tour the most",
+    "none_chosen": "None of those meet your need ? Call us to tailor made for you !"
+  },
+  "navBar": {
+    "home": "home",
+    "daily_tours": "daily tours",
+    "central_tours": "central tours",
+    "about": "about",
+    "get_in_touch": "Contact",
+    "phone": "(+84)971.864.864"
+  },
+  "loading": {
+    "wait": "PLEASE KINDLY WAIT A MOMENT",
+    "load": "Processing..."
+  },
+  "tourGallery": {
+    "tour_intro": "Tour Intro:",
+    "tour_hightlights": "Highlights:",
+    "tour_itinerary": "Brief Itinerary:",
+    "tour_inclusion": "Inclusions:",
+    "tour_price": "Price:",
+    "price_pax_no": "No of person",
+    "price_price": "Price",
+
+    "daily": "our daily tours",
+    "central": "our central tours",
+    "counting": "and counting...",
+    "group": "Group",
+    "pax": "pax",
+    "price_from": "FROM"
+  }
+}

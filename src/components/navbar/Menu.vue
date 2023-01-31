@@ -1,32 +1,26 @@
 <script setup>
 import UnderlineLink from '@navbar/UnderlineLink.vue';
 import { RouterLink } from 'vue-router';
-import i18next from 'i18next';
-import { onBeforeMount } from 'vue';
-import { changeLanguage } from '@utils/changeLanguage';
-let lng = $ref(i18next.language);
-defineProps(['isBurgerMenu']);
+import LanguageSwitcher from '@components/LanguageSwitcher.vue';
+import Trans from '@i18n/translation';
 
-const handleSelected = ({ target }) => {
-  changeLanguage(target.textContent);
-  lng = target.textContent;
-};
-onBeforeMount(() => {
-  !i18next.language && (lng = localStorage.getItem('i18nextLng'));
-});
+const props = defineProps(['isBurgerMenu', 'menuClicked']);
 
 const menuItems = [
   {
-    name: 'links_items.home',
+    name: 'navBar.home',
     link: 'home',
+    id: 1,
   },
   {
-    name: 'links_items.daily_tours',
-    link: 'home',
+    name: 'navBar.daily_tours',
+    link: 'tours',
+    id: 2,
   },
   {
-    name: 'links_items.central_tours',
-    link: 'home',
+    name: 'navBar.central_tours',
+    link: 'tours',
+    id: 3,
   },
 ];
 </script>
@@ -38,34 +32,23 @@ const menuItems = [
   >
     <div
       v-for="item in menuItems"
-      :key="item"
+      :key="item.id"
       class="px-2 text-4xl sm:text-6xl lg:text-xl"
     >
       <RouterLink
         class="relative z-0 uppercase before:absolute before:left-1/2 before:top-1/2 before:-z-10 before:h-2 before:w-0 before:-translate-x-1/2 before:bg-pink-400 before:transition-all before:duration-300 before:ease-linear before:hover:w-[110%] lg:before:translate-y-3 lg:before:bg-orange-400 lg:before:duration-200 cursor-pointer"
-        :to="
-          item.link === 'home'
-            ? { name: item.link }
-            : { name: item.link, params: { menu: item.name } }
-        "
+        :to="Trans.i18nRoute({ name: item.link })"
       >
-        {{ $t(item.name, { ns: 'navbar' }) }}
+        {{ $t(item.name) }}
       </RouterLink>
     </div>
 
     <div class="absolute bottom-0 w-full p-4 lg:hidden">
       <div class="flex items-end justify-between sm:text-2xl">
-        <div class="flex gap-4">
-          <button
-            v-for="lang in ['vn', 'en', 'fr']"
-            :key="lang"
-            class="uppercase"
-            :class="lng === lang ? 'text-chd' : 'text-chd/30'"
-            @click="handleSelected"
-          >
-            {{ lang }}
-          </button>
-        </div>
+        <LanguageSwitcher
+          :scrSize="false"
+          @menuClicked="menuClicked"
+        />
 
         <div className="flex flex-col text-right">
           <div>

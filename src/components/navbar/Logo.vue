@@ -3,7 +3,8 @@
     <img
       :src="logo"
       alt="chd logo"
-      class="object-cover h-full" />
+      class="object-cover h-full"
+    />
   </div>
 </template>
 

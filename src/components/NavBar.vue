@@ -3,10 +3,11 @@ import BurgerBTN from '@navbar/BurgerBTN.vue';
 import Logo from '@navbar/Logo.vue';
 import Menu from '@navbar/Menu.vue';
 import Contact from '@navbar/Contact.vue';
+import { ref } from 'vue';
 
-let isBurgerMenu = $ref(false);
+const isBurgerMenu = ref(false);
 const handleClicked = () => {
-  isBurgerMenu = !isBurgerMenu;
+  isBurgerMenu.value = !isBurgerMenu.value;
 };
 </script>
 
@@ -16,7 +17,10 @@ const handleClicked = () => {
   >
     <BurgerBTN @menuClicked="handleClicked" />
     <Logo />
-    <Menu :isBurgerMenu="isBurgerMenu" />
+    <Menu
+      :isBurgerMenu="isBurgerMenu"
+      :menuClicked="handleClicked"
+    />
     <Contact />
   </nav>
 </template>

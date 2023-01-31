@@ -1,0 +1,37 @@
+{
+  "homeView": {
+    "header": "ĐƠN VỊ CUNG CẤP TOUR HÀNG ĐẦU KHU VỰC TÂY NGUYÊN",
+    "intro": "Chúng tôi cố gắng cung cấp cho khách hàng những dịch vụ tốt nhất trong ngành du lịch hiện nay. Chúng tôi cam kết cung cấp các dịch vụ du lịch với chất lượng cao nhất, kết hợp năng lượng và sự nhiệt tình, với nhiều năm kinh nghiệm của chúng tôi. Sự hài lòng lớn nhất đến với chúng tôi trong việc phục vụ số lượng lớn khách hàng hài lòng, những người đã trải nghiệm niềm vui và cảm hứng khi đi du lịch.",
+    "hot": "Tour tiêu biểu !",
+    "client_enjoy": "Khách hàng đang quan tâm các tour này nhất",
+    "none_chosen": "Không có tour nào đáp ứng nhu cầu của bạn? Hãy gọi cho chúng tôi để được thiết kế tour cho bạn!"
+  },
+  "navBar": {
+    "home": "Trang Chính",
+    "daily_tours": "Tour Hàng Ngày",
+    "central_tours": "Tour Tây Nguyên",
+    "about": "Về Chúng Tôi",
+    "get_in_touch": "Liên Hệ",
+    "phone": "0913.471.352"
+  },
+  "loading": {
+    "wait": "VUI LÒNG CHỜ TRONG GIÂY LÁT",
+    "load": "Đang tải dữ liệu ..."
+  },
+  "tourGallery": {
+    "tour_intro": "Giới Thiệu:",
+    "tour_hightlights": "Các Điểm Chính:",
+    "tour_itinerary": "Lịch Trình:",
+    "tour_inclusion": "Bao Gồm:",
+    "tour_price": "Giá:",
+    "price_pax_no": "Số khách",
+    "price_price": "Thành tiền",
+
+    "daily": "các tour trong ngày",
+    "central": "các tour tây nguyên",
+    "counting": "tour hiện đang được cung cấp",
+    "group": "Nhóm",
+    "pax": "khách",
+    "price_from": "CHỈ TỪ"
+  }
+}

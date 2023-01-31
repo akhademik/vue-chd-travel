@@ -1,10 +1,11 @@
 <script setup>
+import { ref } from 'vue';
 const emit = defineEmits(['menuClicked']);
-let angle = $ref(0);
+const angle = ref(0);
 
 const handleInput = () => {
   emit('menuClicked');
-  angle += 90;
+  angle.value += 90;
 };
 </script>
 <template>
