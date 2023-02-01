@@ -1,11 +1,28 @@
 import axios from 'axios';
 
-export const fetchData = async name => {
-  const URL = `http://localhost:3000/${name}`;
-  try {
-    const data = await axios.get(URL);
-    return data;
-  } catch (e) {
-    console.log('Fetch API error ', e.message);
+const LOCAL_PREFIX = 'chd-travel-';
+
+export const fetchData = async cacheKey => {
+  const URL = `http://localhost:3000/${cacheKey}`;
+  const cachedData = localStorage.getItem(LOCAL_PREFIX + cacheKey);
+  if (cachedData) {
+    const parsedData = JSON.parse(cachedData);
+    const oneDayAgo = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+    if (new Date(parsedData.timestamp) > oneDayAgo) {
+      console.log('Use localStorage data');
+      return parsedData.data;
+    }
   }
+
+  const { data } = await axios.get(URL);
+  console.log('API call');
+
+  localStorage.setItem(
+    LOCAL_PREFIX + cacheKey,
+    JSON.stringify({
+      data,
+      timestamp: new Date(),
+    })
+  );
+  return data;
 };

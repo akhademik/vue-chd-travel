@@ -10,10 +10,8 @@ const data = ref(null);
 const databaseName = ref('daily'); //nho chinh lai sau
 
 onBeforeMount(async () => {
-  const res = await fetchData('result');
-  data.value = res.data;
+  data.value = await fetchData('result');
   data.value && (isLoaded.value = true);
-  console.log(data.value[0]);
 });
 </script>
 
