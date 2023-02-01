@@ -1,9 +1,8 @@
-import axios from 'axios';
+import sanityClient from '../sanityClient';
 
 const LOCAL_PREFIX = 'chd-travel-';
 
 export const fetchData = async cacheKey => {
-  const URL = `http://localhost:3000/${cacheKey}`;
   const cachedData = localStorage.getItem(LOCAL_PREFIX + cacheKey);
   if (cachedData) {
     const parsedData = JSON.parse(cachedData);
@@ -14,7 +13,25 @@ export const fetchData = async cacheKey => {
     }
   }
 
-  const { data } = await axios.get(URL);
+  const data = await sanityClient.fetch(`*[_type == '${[cacheKey]}']{
+		coverImg,
+		tourSlug,
+		tourDuration,
+		tourHighlights[]->{
+    'highlights': tourHighlights
+    },
+		tourID,
+		tourIncludes ->{
+ 		 'includes':	tourIncludes
+		},
+		exchangeRates ->{
+			rates
+		},
+		tourIntro,
+		tourName,
+		tourPrice,
+		tourItinerary,
+	}`);
   console.log('API call');
 
   localStorage.setItem(

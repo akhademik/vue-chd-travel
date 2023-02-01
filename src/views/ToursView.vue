@@ -1,16 +1,17 @@
 <script setup>
+import { ref, onBeforeMount } from 'vue';
 import Loading from '@components/Loading.vue';
 import { fetchData } from '@utils/fetchData';
-import { ref, onBeforeMount } from 'vue';
-import Trans from '@i18n/translation';
 import { formatCurrency } from '@utils/formatCurrency';
+import Trans from '@i18n/translation';
+import { urlFor } from '@/sanityClient';
 
 const isLoaded = ref(false);
 const data = ref(null);
-const databaseName = ref('daily'); //nho chinh lai sau
+const databaseName = ref('tourDaily');
 
 onBeforeMount(async () => {
-  data.value = await fetchData('result');
+  data.value = await fetchData(databaseName.value);
   data.value && (isLoaded.value = true);
 });
 </script>
@@ -33,7 +34,6 @@ onBeforeMount(async () => {
         {{ data.length }} {{ $t('tourGallery.counting') }}
       </p>
     </div>
-    <!-- CARD SECTION -->
     <div class="flex justify-center">
       <ul
         class="relative z-0 flex w-[320px] flex-wrap gap-1 rounded px-1 text-white md:w-[calc(320px*2+1rem)] lg:w-[calc(320px*3+1.2rem)]"
@@ -64,14 +64,18 @@ onBeforeMount(async () => {
               class="absolute inset-0 z-10 group-hover:bg-indigo-100/30"
             ></div>
             <img
-              :src="tour.coverImg.link"
+              :src="
+                urlFor(tour.coverImg)
+                  .height(400)
+                  .auto('format')
+                  .quality(60)
+                  .url()
+              "
               class="absolute z-0 object-cover w-full h-full rounded-lg"
               :alt="tour.coverImg.caption"
             />
           </div>
         </li>
-
-        <li></li>
       </ul>
     </div>
   </section>
