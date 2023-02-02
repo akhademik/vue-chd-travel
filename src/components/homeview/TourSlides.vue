@@ -16,7 +16,7 @@ const sliderStyle = 'h-[400px] md:h-[600px] rounded-lg lg:w-[450px] ';
 const isLoaded = ref(false);
 const data = ref(null);
 
-const databaseName = ref('tourDaily');
+const databaseName = ref('daily');
 
 onBeforeMount(async () => {
   data.value = await fetchData(databaseName.value);

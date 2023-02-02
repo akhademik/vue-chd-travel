@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import Loading from '@components/Loading.vue';
 import { fetchData } from '@utils/fetchData';
 import { formatCurrency } from '@utils/formatCurrency';
@@ -8,7 +9,18 @@ import { urlFor } from '@/sanityClient';
 
 const isLoaded = ref(false);
 const data = ref(null);
-const databaseName = ref('tourDaily');
+const route = useRoute();
+const databaseName = ref(route.name);
+
+watch(
+  () => route.name,
+  async () => {
+    databaseName.value = route.name;
+
+    data.value = await fetchData(databaseName.value);
+    data.value && (isLoaded.value = true);
+  }
+);
 
 onBeforeMount(async () => {
   data.value = await fetchData(databaseName.value);

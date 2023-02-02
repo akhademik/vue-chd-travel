@@ -2,13 +2,20 @@ import sanityClient from '../sanityClient';
 
 const LOCAL_PREFIX = 'chd-travel-';
 
-export const fetchData = async cacheKey => {
+export const fetchData = async databaseName => {
+  const cacheKey = databaseName === 'daily' ? 'tourDaily' : 'tourCentral';
   const cachedData = localStorage.getItem(LOCAL_PREFIX + cacheKey);
+  const staleTimeMins = 20;
+  const staleTimeHours = 0;
+
   if (cachedData) {
     const parsedData = JSON.parse(cachedData);
-    const oneDayAgo = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+    const oneDayAgo = new Date(
+      new Date().getTime() -
+        (staleTimeHours === 0 ? 1 : staleTimeHours) * staleTimeMins * 60 * 1000
+    );
     if (new Date(parsedData.timestamp) > oneDayAgo) {
-      console.log('Use localStorage data');
+      console.log('Stale data');
       return parsedData.data;
     }
   }
