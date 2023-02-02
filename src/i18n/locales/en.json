@@ -20,7 +20,7 @@
   },
   "tourGallery": {
     "tour_intro": "Tour Intro:",
-    "tour_hightlights": "Highlights:",
+    "tour_highlights": "Highlights:",
     "tour_itinerary": "Brief Itinerary:",
     "tour_inclusion": "Inclusions:",
     "tour_price": "Price:",
@@ -33,5 +33,22 @@
     "group": "Group",
     "pax": "pax",
     "price_from": "FROM"
+  },
+  "contactView": {
+    "contact": "CONTACT & LOCATION",
+    "intro": "If you have any questions about our tours, or would like to speak to the team at CHD to custom made your tour, please get in touch via one of the options below.",
+    "address": "09 Nguyen Binh Street",
+    "city": "Buon Ma Thuot City",
+    "province": "Daklak Province, Vietnam",
+
+    "phone": "Phone:",
+    "phone_no": "+84.262.396.68.68",
+    "hotline": "Hotline:",
+    "hotline_no": "+84.913.471.352",
+    "reservation": "(Reservations are open Monday – Friday 9am – 7pm and Saturday 9am – 5pm).",
+    "we_speak": "We speak your languages",
+    "english": "For English:",
+    "french": "For French:",
+    "viet": "For Vietnamese:"
   }
 }
