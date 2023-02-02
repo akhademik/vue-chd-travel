@@ -9,7 +9,7 @@
       <div
         class="z-1 absolute flex h-[350px] items-center justify-center text-2xl font-bold"
       >
-        MAP IS LOADING ...
+        {{ $t('loading.load') }}
       </div>
       <iframe
         class="z-2 relative h-[350px] w-[100%] rounded-xl lg:h-[600px] border border-chd p-2"
