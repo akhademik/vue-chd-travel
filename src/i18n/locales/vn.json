@@ -33,5 +33,22 @@
     "group": "Nhóm",
     "pax": "khách",
     "price_from": "CHỈ TỪ"
+  },
+  "contactView": {
+    "contact": "LIÊN HỆ & VỊ TRÍ",
+    "intro": "Nếu bạn có bất kỳ câu hỏi nào về các chuyến tham quan của chúng tôi hoặc muốn nói chuyện với nhóm tại CHD để tùy chỉnh thực hiện chuyến tham quan của bạn, vui lòng liên hệ qua một trong các tùy chọn bên dưới.",
+    "address": "09 Nguyễn Bính",
+    "city": "Thành phố Buôn Ma Thuột",
+    "province": "Tỉnh Daklak, Việt Nam",
+
+    "phone": "Điện thoại:",
+    "phone_no": "+84.262.396.68.68",
+    "hotline": "Đường dây nóng:",
+    "hotline_no": "+84.913.471.352",
+    "reservation": "(Gọi cho chúng tôi từ Thứ Hai – Thứ Sáu, 9 giờ sáng – 7 giờ tối và Thứ Bảy, 9 giờ sáng – 5 giờ chiều). ",
+    "we_speak": "Chúng tôi nói ngôn ngữ của bạn",
+    "english": "Tiếng Anh:",
+    "french": "Tiếng Pháp:",
+    "viet": "Tiếng Việt:"
   }
 }

@@ -1,5 +1,38 @@
+<script setup>
+import { ref, onBeforeMount } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Navigation, Pagination, EffectCoverflow } from 'swiper';
+import Loading from '@components/Loading.vue';
+import { urlFor } from '@/sanityClient';
+import { fetchData } from '@utils/fetchData';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
+const currentSlide = ref(1);
+const sliderStyle = 'h-[400px] md:h-[600px] rounded-lg lg:w-[450px] ';
+
+const isLoaded = ref(false);
+const data = ref(null);
+
+const databaseName = ref('daily');
+
+onBeforeMount(async () => {
+  data.value = await fetchData(databaseName.value);
+  data.value && (isLoaded.value = true);
+});
+
+const handleSlideChange = e => {
+  currentSlide.value = e.realIndex + 1;
+};
+</script>
+
 <template>
+  <Loading v-if="!isLoaded" />
+
   <Swiper
+    v-else
     class="px-2 py-2 my-4 lg:max-w-7xl"
     :autoHeight="true"
     :grabCursor="true"
@@ -55,7 +88,14 @@
       :class="sliderStyle"
     >
       <img
-        :src="item.img"
+        :src="
+          urlFor(item.coverImg)
+            .height(600)
+            .width(450)
+            .auto('format')
+            .quality(60)
+            .url()
+        "
         :class="sliderStyle"
         class="w-[230px] object-cover sm:w-full"
         :alt="item.caption"
@@ -74,30 +114,6 @@
     </div>
   </Swiper>
 </template>
-
-<script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, Navigation, Pagination, EffectCoverflow } from 'swiper';
-import { ref } from 'vue';
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-
-const currentSlide = ref(1);
-
-const sliderStyle = 'h-[400px] md:h-[600px] rounded-lg lg:w-[450px] ';
-
-const data = [
-  { img: 'https://picsum.photos/200/300', caption: 'dummy1' },
-  { img: 'https://picsum.photos/300/400', caption: 'dummy1' },
-  { img: 'https://picsum.photos/400/500', caption: 'dummy1' },
-];
-
-const handleSlideChange = e => {
-  currentSlide.value = e.realIndex + 1;
-};
-</script>
 
 <style>
 .swiper-pagination-bullet {

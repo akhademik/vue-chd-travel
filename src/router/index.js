@@ -18,15 +18,14 @@ const routes = [
         component: HomeView,
       },
       {
-        path: 'tours',
-        name: 'tours',
+        path: 'daily-tours',
+        name: 'daily',
         component: ToursView,
-        // beforeEnter: (to, from, next) => {
-        //   // ...
-        //   console.log('to ', to);
-        //   console.log('from ', from);
-        //   console.log('next ', next);
-        // },
+      },
+      {
+        path: 'central-tours',
+        name: 'central',
+        component: ToursView,
       },
       {
         path: 'contact',
@@ -40,6 +39,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
+  linkExactActiveClass: 'before:w-[110%]',
 });
 
 export default router;

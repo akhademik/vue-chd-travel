@@ -1,11 +1,52 @@
-import axios from 'axios';
+import sanityClient from '../sanityClient';
 
-export const fetchData = async name => {
-  const URL = `http://localhost:3000/${name}`;
-  try {
-    const data = await axios.get(URL);
-    return data;
-  } catch (e) {
-    console.log('Fetch API error ', e.message);
+const LOCAL_PREFIX = 'chd-travel-';
+
+export const fetchData = async databaseName => {
+  const cacheKey = databaseName === 'daily' ? 'tourDaily' : 'tourCentral';
+  const cachedData = localStorage.getItem(LOCAL_PREFIX + cacheKey);
+  const staleTimeMins = 20;
+  const staleTimeHours = 0;
+
+  if (cachedData) {
+    const parsedData = JSON.parse(cachedData);
+    const oneDayAgo = new Date(
+      new Date().getTime() -
+        (staleTimeHours === 0 ? 1 : staleTimeHours) * staleTimeMins * 60 * 1000
+    );
+    if (new Date(parsedData.timestamp) > oneDayAgo) {
+      console.log('Stale data');
+      return parsedData.data;
+    }
   }
+
+  const data = await sanityClient.fetch(`*[_type == '${[cacheKey]}']{
+		coverImg,
+		tourSlug,
+		tourDuration,
+		tourHighlights[]->{
+    'highlights': tourHighlights
+    },
+		tourID,
+		tourIncludes ->{
+ 		 'includes':	tourIncludes
+		},
+		exchangeRates ->{
+			rates
+		},
+		tourIntro,
+		tourName,
+		tourPrice,
+		tourItinerary,
+	}`);
+  console.log('API call');
+
+  localStorage.setItem(
+    LOCAL_PREFIX + cacheKey,
+    JSON.stringify({
+      data,
+      timestamp: new Date(),
+    })
+  );
+  return data;
 };
