@@ -4,6 +4,7 @@ import Trans from '@i18n/translation';
 import HomeView from '@views/HomeView.vue';
 import ContactView from '@views/ContactView.vue';
 import ToursView from '@views/ToursView.vue';
+import TourDetail from '@components/TourDetail.vue';
 
 const routes = [
   // home view
@@ -21,11 +22,25 @@ const routes = [
         path: 'daily-tours',
         name: 'daily',
         component: ToursView,
+        children: [
+          {
+            path: ':slug',
+            name: 'daily-detail',
+            component: TourDetail,
+          },
+        ],
       },
       {
         path: 'central-tours',
         name: 'central',
         component: ToursView,
+        children: [
+          {
+            path: ':slug',
+            name: 'central-detail',
+            component: TourDetail,
+          },
+        ],
       },
       {
         path: 'contact',
@@ -39,7 +54,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
-  linkExactActiveClass: 'before:w-[109%]',
+  linkExactActiveClass: 'before:w-[108%]',
 });
 
 export default router;

@@ -1,22 +1,28 @@
 <script setup>
 import { ref, onBeforeMount, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, RouterLink } from 'vue-router';
 import Loading from '@components/Loading.vue';
+import TourDetail from '@components/TourDetail.vue';
 import { fetchData } from '@utils/fetchData';
 import { formatCurrency } from '@utils/formatCurrency';
 import Trans from '@i18n/translation';
 import { urlFor } from '@/sanityClient';
 
+const isModal = ref(true);
 const isLoaded = ref(false);
 const data = ref(null);
 const route = useRoute();
 const databaseName = ref(route.name);
 
+const handleTourDetails = (database, slug) => {
+  // isModal.value = true;
+  console.log('clicked');
+};
+
 watch(
   () => route.name,
   async () => {
     databaseName.value = route.name;
-
     data.value = await fetchData(databaseName.value);
     data.value && (isLoaded.value = true);
   }
@@ -50,11 +56,34 @@ onBeforeMount(async () => {
       <ul
         class="relative z-0 flex w-[320px] flex-wrap gap-1 rounded px-1 text-white md:w-[calc(320px*2+1rem)] lg:w-[calc(320px*3+1.2rem)]"
       >
-        <li
+        <RouterLink
           v-for="(tour, idx) in data"
           :key="idx"
+          as="li"
+          :to="
+            databaseName === 'daily'
+              ? {
+                  name: 'daily-detail',
+                  params: {
+                    locale: Trans.currentLocale,
+                    slug: tour.tourSlug[Trans.currentLocale].current,
+                  },
+                }
+              : {
+                  name: 'central-detail',
+                  params: {
+                    locale: Trans.currentLocale,
+                    slug: tour.tourSlug[Trans.currentLocale].current,
+                  },
+                }
+          "
           class="group h-[400px] w-[320px] cursor-pointer"
-          @click="handleTourDetails"
+          @click="
+            handleTourDetails(
+              databaseName,
+              tour.tourSlug[Trans.currentLocale].current
+            )
+          "
         >
           <div
             class="relative grid h-full w-full grid-rows-[1fr_55px] p-3 font-bold"
@@ -87,8 +116,11 @@ onBeforeMount(async () => {
               :alt="tour.coverImg.caption"
             />
           </div>
-        </li>
+        </RouterLink>
       </ul>
     </div>
   </section>
+  <Teleport to="body">
+    <TourDetail v-if="isModal" />
+  </Teleport>
 </template>

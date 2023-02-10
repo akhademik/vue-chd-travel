@@ -4,7 +4,7 @@ const LOCAL_PREFIX = 'chd-travel-';
 
 export const fetchData = async databaseName => {
   const cacheKey = databaseName === 'daily' ? 'tourDaily' : 'tourCentral';
-  const cachedData= localStorage.getItem(LOCAL_PREFIX + cacheKey);
+  const cachedData = localStorage.getItem(LOCAL_PREFIX + cacheKey);
   const staleTimeMins = 20;
   const staleTimeHours = 0;
 
@@ -15,7 +15,7 @@ export const fetchData = async databaseName => {
         (staleTimeHours === 0 ? 1 : staleTimeHours) * staleTimeMins * 60 * 1000
     );
     if (new Date(parsedData.timestamp) > cachedTime) {
-      console.log('Stale data');
+      // console.log('Stale data');
       return parsedData.data;
     }
   }
