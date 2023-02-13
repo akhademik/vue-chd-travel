@@ -55,7 +55,7 @@ const priceRange = [
         <p
           class="relative pb-2 font-bold before:absolute before:bottom-0 before:h-[1px] before:w-full before:bg-chd/30"
         >
-          {{ $t('tourGallery.tour_hightlights') }}
+          {{ $t('tourGallery.tour_highlights') }}
         </p>
         <li
           v-for="({ highlights }, idx) in props.data.tourHighlights"

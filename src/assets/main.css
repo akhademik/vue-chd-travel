@@ -9,6 +9,16 @@
   outline: 1px dashed blue;
 }
 
+body.noscroll {
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 540px) {
+  body.noscroll {
+    overflow: hidden;
+  }
+}
+
 * {
   /* outline: 1px dashed red; */
 }

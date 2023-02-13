@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onBeforeMount, watch } from 'vue';
-import { useRoute, RouterLink, RouterView } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import Loading from '@components/Loading.vue';
 import { fetchData } from '@utils/fetchData';
 import { formatCurrency } from '@utils/formatCurrency';
@@ -10,6 +10,7 @@ import { urlFor } from '@/sanityClient';
 const isLoaded = ref(false);
 const data = ref(null);
 const route = useRoute();
+const router = useRouter();
 const databaseName = ref(route.name);
 
 watch(
@@ -17,14 +18,22 @@ watch(
   async () => {
     databaseName.value = route.name;
     data.value = await fetchData(databaseName.value);
-    data.value && (isLoaded.value = true);
+    isLoaded.value = true;
   }
 );
 
 onBeforeMount(async () => {
   data.value = await fetchData(databaseName.value);
-  data.value && (isLoaded.value = true);
+  isLoaded.value = true;
 });
+
+const handleTourDetail = slug => {
+  document.body.classList.add('noscroll');
+  router.push({
+    name: route.name === 'daily' ? 'daily-detail' : 'central-detail',
+    params: { slug },
+  });
+};
 </script>
 
 <template>
@@ -49,18 +58,11 @@ onBeforeMount(async () => {
       <ul
         class="relative z-0 flex w-[320px] flex-wrap gap-1 rounded px-1 text-white md:w-[calc(320px*2+1rem)] lg:w-[calc(320px*3+1.2rem)]"
       >
-        <RouterLink
+        <li
           v-for="(tour, idx) in data"
           :key="idx"
-          as="li"
-          :to="{
-            name: 'daily-detail',
-            params: {
-              locale: Trans.currentLocale,
-              slug: tour.tourSlug[Trans.currentLocale].current,
-            },
-          }"
           class="group h-[400px] w-[320px] cursor-pointer"
+          @click="handleTourDetail(tour.tourSlug[Trans.currentLocale].current)"
         >
           <div
             class="relative grid h-full w-full grid-rows-[1fr_55px] p-3 font-bold"
@@ -93,7 +95,7 @@ onBeforeMount(async () => {
               :alt="tour.coverImg.caption"
             />
           </div>
-        </RouterLink>
+        </li>
       </ul>
     </div>
   </section>
