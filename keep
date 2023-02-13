@@ -1,73 +1,17 @@
-<div>
-        <div :class="STYLE.right_div.main">
-          <div class="h-full max-w-4xl mx-auto">
-            <div class="flex flex-col gap-2 my-6 lg:mt-32">
-              <p :class="STYLE.right_div.ul_p">{t('tour_intro')}</p>
-              <span class="px-2">
-                <SanityBlocks :blocks="tourIntro[lang]" />
-              </span>
-            </div>
-            <ul class="flex flex-col gap-2">
-              <p :class="STYLE.right_div.ul_p">{t('tour_hightlights')}</p>
-              {tourHighlights.map(item => (
-              <li
-                key="{item.highlights[lang]}"
-                class="relative gap-2 pl-6"
-              >
-                <div :class="STYLE.right_div.li_div">
-                  <HiOutlineArrowDownRight />
-                </div>
-                {item.highlights[lang]}
-              </li>
-              ))}
-            </ul>
-
-            <div class="flex flex-col gap-2 my-6">
-              <p :class="STYLE.right_div.ul_p">{t('tour_itinerary')}</p>
-              <span class="px-2">
-                <SanityBlocks :blocks="tourItinerary[lang]" />
-              </span>
-            </div>
-
-            <div class="flex flex-col gap-2 my-6">
-              <p :class="STYLE.right_div.ul_p">{t('tour_price')}</p>
-              <table
-                class="mx-auto mt-3 mb-6 min-w-[328px] text-chd sm:min-w-[450px]"
-              >
-                <thead class="bg-chd/80">
-                  <tr class="text-white [&>th]:py-2">
-                    <th class="rounded-tl-lg">{t('price_pax_no')}</th>
-                    <th class="rounded-tr-lg">{t('price_price')}</th>
-                  </tr>
-                </thead>
-                <tbody :class="STYLE.right_div.tbody">
-                  {priceRange.map((group, idx) => { if (!group.price) return
-                  null; return (
-                  <tr key="{idx}">
-                    <td>{group.size}</td>
-                    <td>{formatCurrency(data, group.price, lang)} /pax</td>
-                  </tr>
-                  ); })}
-                </tbody>
-              </table>
-            </div>
-
-            <ul class="flex flex-col gap-2 pb-10">
-              <p :class="STYLE.right_div.ul_p">{t('tour_inclusion')}</p>
-              {tourIncludes.includes.map(item => (
-              <li
-                key="{item.vn}"
-                class="relative gap-2 pl-6"
-              >
-                <div :class="STYLE.right_div.li_div">
-                  <BiBadgeCheck />
-                </div>
-                {item[lang]}
-              </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+:to="
+            databaseName === 'daily'
+              ? {
+                  name: 'daily-detail',
+                  params: {
+                    locale: Trans.currentLocale,
+                    slug: tour.tourSlug[Trans.currentLocale].current,
+                  },
+                }
+              : {
+                  name: 'central-detail',
+                  params: {
+                    locale: Trans.currentLocale,
+                    slug: tour.tourSlug[Trans.currentLocale].current,
+                  },
+                }
+          "

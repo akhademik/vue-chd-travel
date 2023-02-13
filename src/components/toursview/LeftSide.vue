@@ -1,4 +1,4 @@
-<template>
+<template v-if="props.data">
   <div
     class="relative flex min-h-[400px] flex-col items-center justify-end bg-chd/80 lg:fixed lg:top-0 lg:bottom-0 lg:w-1/2 lg:justify-center"
   >
@@ -6,7 +6,14 @@
       class="absolute inset-0 p-3 lg:static lg:flex lg:items-center lg:justify-center lg:p-8"
     >
       <img
-        :src="urlFor(coverImg).height(400).auto('format').quality(60).url()"
+        loading="lazy"
+        :src="
+          urlFor(props.data.coverImg)
+            .height(400)
+            .auto('format')
+            .quality(60)
+            .url()
+        "
         class="object-cover w-full h-full rounded-lg lg:hidden"
       />
       <div
@@ -15,7 +22,7 @@
         <img
           loading="lazy"
           :src="
-            urlFor(coverImg)
+            urlFor(props.data.coverImg)
               .height(700)
               .width(500)
               .auto('format')
@@ -27,8 +34,12 @@
       </div>
     </picture>
     <span class="max-w-[500px] z-10 px-10 text-center pb-10">
-      <h1 class="text-xl font-bold">{{ tourName[Trans.currentLocale] }}</h1>
-      <p class="pt-3 text-base">{{ tourDuration[Trans.currentLocale] }}</p>
+      <h1 class="text-xl font-bold">
+        {{ props.data.tourName[Trans.currentLocale] }}
+      </h1>
+      <p class="pt-3 text-base">
+        {{ props.data.tourDuration[Trans.currentLocale] }}
+      </p>
     </span>
   </div>
 </template>
@@ -38,5 +49,4 @@ import { urlFor } from '@/sanityClient';
 import Trans from '@i18n/translation';
 
 const props = defineProps(['data']);
-const { coverImg, tourName, tourDuration } = props.data;
 </script>

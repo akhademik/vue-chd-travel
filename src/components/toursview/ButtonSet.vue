@@ -4,7 +4,7 @@
   >
     <button
       class="p-1.5 hover:bg-slate-500 bg-slate-200 hover:text-white text-chd animation-all duration-200 linear"
-      @click="handleClose"
+      @click="$emit('toggleModal')"
     >
       <!-- CLOSE ICON -->
       <svg
@@ -22,7 +22,7 @@
     <div class="flex gap-0.5 lg:flex-col">
       <button
         class="p-1.5 hover:bg-slate-500 bg-slate-200 hover:text-white text-chd animation-all duration-200 linear"
-        @click="handlePrev"
+        @click="$emit('prevItem')"
       >
         <!-- LEFT ICON-->
         <svg
@@ -41,7 +41,7 @@
       </button>
       <button
         class="p-1.5 hover:bg-slate-500 bg-slate-200 hover:text-white text-chd animation-all duration-200 linear"
-        @click="handleNext"
+        @click="$emit('nextItem')"
       >
         <!-- RIGHT ICON -->
         <svg
@@ -63,5 +63,3 @@
     </div>
   </div>
 </template>
-
-<script setup></script>
