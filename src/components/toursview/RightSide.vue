@@ -5,9 +5,7 @@ import Trans from '@i18n/translation';
 import { SanityBlocks } from 'sanity-blocks-vue-component';
 
 const { t } = useI18n();
-
 const props = defineProps(['data']);
-
 const priceRange = [
   {
     size: `${t('tourGallery.group')} 01 ${t('tourGallery.pax')}`,

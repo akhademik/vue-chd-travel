@@ -1,4 +1,4 @@
-<template v-if="props.data">
+<template>
   <div
     class="relative flex min-h-[400px] flex-col items-center justify-end bg-chd/80 lg:fixed lg:top-0 lg:bottom-0 lg:w-1/2 lg:justify-center"
   >

@@ -54,7 +54,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes,
-  linkExactActiveClass: 'before:w-[108%]',
+  linkExactActiveClass: 'before:w-[111%]',
 });
 
 export default router;

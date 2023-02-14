@@ -6,13 +6,24 @@
         v-show="isModal"
         class="absolute inset-0 z-30 flex h-max flex-col bg-white font-Roboto text-white sm:text-xl lg:h-[120%] lg:flex-row"
       >
+        <transition name="left">
+          <LeftSide
+            v-show="isTransition"
+            :data="currentData"
+          />
+        </transition>
+
         <ButtonSet
           @toggleModal="toggleModal"
           @nextItem="nextItem"
           @prevItem="prevItem"
         />
-        <LeftSide :data="currentData" />
-        <RightSide :data="currentData" />
+        <transition name="right">
+          <RightSide
+            v-show="isTransition"
+            :data="currentData"
+          />
+        </transition>
       </div>
     </template>
   </teleport>
@@ -23,6 +34,7 @@ import {
   ref,
   watch,
   onBeforeMount,
+  onBeforeUnmount,
   computed,
   onMounted,
   onUnmounted,
@@ -44,6 +56,7 @@ const slug = route.params.slug;
 
 const selectedSlugIndex = ref(null);
 const isModal = ref(true);
+const isTransition = ref(false);
 const isLoaded = ref(false);
 const data = ref(null);
 
@@ -103,12 +116,40 @@ onBeforeMount(async () => {
   );
 
   isLoaded.value = true;
+  setTimeout(() => {
+    isTransition.value = true;
+  }, 10);
 });
 
-onMounted(() => {
-  window.addEventListener('resize', handleResize);
-});
+onBeforeUnmount(() => {
+  isTransition.value = false;
+}),
+  onMounted(() => {
+    window.addEventListener('resize', handleResize);
+  });
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
 </script>
+
+<style>
+.right-enter-active,
+.right-leave-active,
+.left-enter-active,
+.left-leave-active {
+  transition: all 2s ease;
+  transform: translateX(0);
+}
+
+.left-enter-from,
+.left-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.right-enter-from,
+.right-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+</style>
