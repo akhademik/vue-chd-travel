@@ -27,11 +27,21 @@ onBeforeMount(async () => {
   isLoaded.value = true;
 });
 
+const handleResize = () => {
+  const width = document.documentElement.clientWidth;
+
+  if (width < 1024 && document.body.classList.contains('noscroll')) {
+    document.body.classList.remove('noscroll');
+  } else if (width >= 1024 && !document.body.classList.contains('noscroll')) {
+    document.body.classList.add('noscroll');
+  }
+};
+
 const handleTourDetail = slug => {
-  document.body.classList.add('noscroll');
+  handleResize();
   router.push({
     name: route.name === 'daily' ? 'daily-detail' : 'central-detail',
-    params: { slug },
+    params: { locale: Trans.currentLocale, slug },
   });
 };
 </script>

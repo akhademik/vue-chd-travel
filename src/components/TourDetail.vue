@@ -19,14 +19,22 @@
 </template>
 
 <script setup>
+import {
+  ref,
+  watch,
+  onBeforeMount,
+  computed,
+  onMounted,
+  onUnmounted,
+} from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
 import Loading from '@components/Loading.vue';
 import ButtonSet from '@components/toursview/ButtonSet.vue';
 import LeftSide from '@components/toursview/LeftSide.vue';
 import RightSide from '@components/toursview/RightSide.vue';
 
-import { ref, watch, onBeforeMount, computed } from 'vue';
 import { fetchData } from '@utils/fetchData';
-import { useRoute, useRouter } from 'vue-router';
 import Trans from '@i18n/translation';
 
 const route = useRoute();
@@ -67,6 +75,16 @@ const prevItem = () => {
   }
 };
 
+const handleResize = () => {
+  const width = document.documentElement.clientWidth;
+
+  if (width < 1024 && document.body.classList.contains('noscroll')) {
+    document.body.classList.remove('noscroll');
+  } else if (width >= 1024 && !document.body.classList.contains('noscroll')) {
+    document.body.classList.add('noscroll');
+  }
+};
+
 watch(
   () => selectedSlugIndex.value,
   () => {
@@ -85,5 +103,12 @@ onBeforeMount(async () => {
   );
 
   isLoaded.value = true;
+});
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
 });
 </script>
