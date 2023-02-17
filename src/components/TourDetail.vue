@@ -1,27 +1,38 @@
 <template>
-  <Loading v-if="!isLoaded" />
+  <Loading v-if="!isDataLoaded" />
   <teleport to="body">
     <template v-if="data">
       <div
-        v-show="isModal"
         class="absolute inset-0 z-30 flex h-max flex-col bg-white font-Roboto text-white sm:text-xl lg:h-[120%] lg:flex-row"
       >
-        <transition name="left">
+        <transition
+          name="button"
+          mode="out-in"
+        >
+          <ButtonSet
+            v-show="isModalOpen"
+            @toggleModal="toggleModal"
+            @nextItem="nextItem"
+            @prevItem="prevItem"
+          />
+        </transition>
+        <transition
+          name="left"
+          mode="out-in"
+        >
           <LeftSide
-            v-show="isTransition"
-            :data="currentData"
+            v-show="isModalOpen"
+            :data="tourData"
           />
         </transition>
 
-        <ButtonSet
-          @toggleModal="toggleModal"
-          @nextItem="nextItem"
-          @prevItem="prevItem"
-        />
-        <transition name="right">
+        <transition
+          name="right"
+          mode="out-in"
+        >
           <RightSide
-            v-show="isTransition"
-            :data="currentData"
+            v-show="isModalOpen"
+            :data="tourData"
           />
         </transition>
       </div>
@@ -34,12 +45,12 @@ import {
   ref,
   watch,
   onBeforeMount,
-  onBeforeUnmount,
   computed,
   onMounted,
   onUnmounted,
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { delayAction } from '@/utils/delayAction';
 
 import Loading from '@components/Loading.vue';
 import ButtonSet from '@components/toursview/ButtonSet.vue';
@@ -49,23 +60,23 @@ import RightSide from '@components/toursview/RightSide.vue';
 import { fetchData } from '@utils/fetchData';
 import Trans from '@i18n/translation';
 
+const delayTime = 1000;
 const route = useRoute();
 const router = useRouter();
 const databaseName = ref(route.name.split('-')[0]);
 const slug = route.params.slug;
 
 const selectedSlugIndex = ref(null);
-const isModal = ref(true);
-const isTransition = ref(false);
-const isLoaded = ref(false);
+const isModalOpen = ref(false);
+const isDataLoaded = ref(false);
 const data = ref(null);
 
-const currentData = computed(() => data.value[selectedSlugIndex.value]);
+const tourData = computed(() => data.value[selectedSlugIndex.value]);
 
 const toggleModal = () => {
-  isModal.value = !isModal.value;
+  isModalOpen.value = !isModalOpen.value;
   document.body.classList.remove('noscroll');
-  router.back();
+  delayAction(() => router.back(), delayTime);
 };
 
 const nextItem = () => {
@@ -103,7 +114,7 @@ watch(
   () => {
     router.replace({
       params: {
-        slug: currentData.value.tourSlug[Trans.currentLocale].current,
+        slug: tourData.value.tourSlug[Trans.currentLocale].current,
       },
     });
   }
@@ -114,19 +125,14 @@ onBeforeMount(async () => {
   selectedSlugIndex.value = data.value.findIndex(
     item => item.tourSlug[Trans.currentLocale].current === slug
   );
-
-  isLoaded.value = true;
-  setTimeout(() => {
-    isTransition.value = true;
-  }, 10);
+  isDataLoaded.value = true;
+  data.value && delayAction(() => (isModalOpen.value = true), 1);
 });
 
-onBeforeUnmount(() => {
-  isTransition.value = false;
-}),
-  onMounted(() => {
-    window.addEventListener('resize', handleResize);
-  });
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
@@ -137,8 +143,19 @@ onUnmounted(() => {
 .right-leave-active,
 .left-enter-active,
 .left-leave-active {
-  transition: all 2s ease;
+  transition: all v-bind(`${delayTime/1000}s`) ease;
   transform: translateX(0);
+}
+.button-enter-active,
+.button-leave-active {
+  transition: all v-bind(`${delayTime/1000}s`) ease;
+  transform: translateX(0);
+}
+
+.button-enter-from,
+.button-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 
 .left-enter-from,
