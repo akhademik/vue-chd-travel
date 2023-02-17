@@ -50,7 +50,7 @@ const menuItems = [
 
         <div className="flex flex-col text-right">
           <div>
-            <UnderlineLink name="0971864864" />
+            <UnderlineLink name="0913.471.352" />
           </div>
           <div>
             <UnderlineLink name="info@chdtravel.com" />
